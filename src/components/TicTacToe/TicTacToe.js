@@ -84,7 +84,7 @@ export function TicTacToe() {
       </div>
       {hasWinner ? (
         <div className="title">
-          <h3>Game over. Winner is {currentPlayer}</h3>
+          <h3 className="status">Game over. Winner is {currentPlayer}</h3>
           <button onClick={playAgain}>Play again</button>
         </div>
       ) : (
