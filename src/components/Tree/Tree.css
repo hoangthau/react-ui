@@ -1,0 +1,30 @@
+.item {
+  text-align: left;
+  cursor: pointer;
+  margin: 8px;
+  display: flex;
+  min-height: 22px;
+}
+
+.sub-items {
+  margin-left: 10px;
+  border-left: 1px solid #dbdbdb;
+  padding-left: 10px;
+}
+
+.icon-folder {
+  margin-right: 4px;
+}
+
+.actions {
+  display: none;
+  margin-left: 10px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.item:hover .actions {
+  display: block;
+}
