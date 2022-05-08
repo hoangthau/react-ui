@@ -1,11 +1,20 @@
 import React, { useRef, useState } from "react";
 import { useDrop, useDrag } from "react-dnd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFolderOpen,
+  faFolderClosed,
+  faPen,
+  faTrash,
+  faCheck,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 const itemStyles = {
   border: "1px dashed gray",
-  marginBottom: ".5rem",
+  marginBottom: "8px",
   backgroundColor: "white",
-  cursor: "move"
+  cursor: "move",
 };
 
 export function Item({
@@ -17,7 +26,7 @@ export function Item({
   isFolder,
   isOpen,
   onDelete,
-  onSave
+  onSave,
 }) {
   const ref = useRef(null);
   const inputRef = useRef(null);
@@ -27,7 +36,7 @@ export function Item({
     accept: "TreeItem",
     collect(monitor) {
       return {
-        handlerId: monitor.getHandlerId()
+        handlerId: monitor.getHandlerId(),
       };
     },
     hover(item, monitor) {
@@ -40,7 +49,7 @@ export function Item({
         return;
       }
       onMove(dragId, hoverId);
-    }
+    },
   });
 
   const [{ isDragging }, drag] = useDrag({
@@ -49,8 +58,8 @@ export function Item({
       return { id, index };
     },
     collect: (monitor) => ({
-      isDragging: monitor.isDragging()
-    })
+      isDragging: monitor.isDragging(),
+    }),
   });
   const opacity = isDragging ? 0.4 : 1;
   const styles = isDragging ? itemStyles : {};
@@ -58,7 +67,11 @@ export function Item({
 
   const renderIcon = () => {
     if (!isFolder) return null;
-    return isOpen ? "-" : "+";
+    return isOpen ? (
+      <FontAwesomeIcon icon={faFolderOpen} />
+    ) : (
+      <FontAwesomeIcon icon={faFolderClosed} />
+    );
   };
 
   const handleDelete = (e) => {
@@ -85,17 +98,25 @@ export function Item({
       onClick={onClick}
       className="item"
     >
-      <span className="icon-folder">{renderIcon()}</span>
+      {renderIcon()}
       {isEdit ? <input type="text" defaultValue={name} ref={inputRef} /> : name}
       {isEdit ? (
         <div className="actions">
-          <button onClick={handleEdit}>Save</button>
-          <button onClick={toggleEdit}>Cancel</button>
+          <button onClick={handleEdit}>
+            <FontAwesomeIcon icon={faCheck} />
+          </button>
+          <button onClick={toggleEdit}>
+            <FontAwesomeIcon icon={faXmark} />
+          </button>
         </div>
       ) : (
         <div className="actions">
-          <button onClick={toggleEdit}>Edit</button>
-          <button onClick={handleDelete}>Delete</button>
+          <button onClick={toggleEdit}>
+            <FontAwesomeIcon icon={faPen} />
+          </button>
+          <button onClick={handleDelete}>
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
         </div>
       )}
     </div>
