@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { TreeItem } from "./TreeItem";
-import { treeData } from "./treeData";
 import "./Tree.css";
 import { updateTree, deleteNode, updateNode } from "./helpers";
 
-export function Tree() {
-  const [treeItems, setTreeItems] = useState(treeData);
+export function Tree({ items }) {
+  const [treeItems, setTreeItems] = useState(items);
 
   const handleMove = (dragId, dropId) => {
     const newTree = [...treeItems];
@@ -23,6 +22,19 @@ export function Tree() {
     const newTree = [...treeItems];
     updateNode(newTree, nodeId, name);
     setTreeItems(newTree);
+  };
+
+  const handleExport = async () => {
+    const fileName = "file";
+    const json = JSON.stringify(treeItems);
+    const blob = new Blob([json], { type: "application/json" });
+    const href = await URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = href;
+    link.download = fileName + ".json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -43,6 +55,7 @@ export function Tree() {
           />
         );
       })}
+      <button onClick={handleExport}>Export Tree to JSON</button>
     </>
   );
 }

@@ -35,7 +35,7 @@ export function TicTacToe() {
   hasWinner = checkWinner(tableItems, currentPlayer);
 
   return (
-    <>
+    <div>
       <div className={`table ${hasWinner ? "disabled" : ""}`}>
         {tableItems.map((row, rowIndex) => {
           return row.map((column, colIndex) => (
@@ -63,6 +63,6 @@ export function TicTacToe() {
       ) : (
         <h3>Next player is {nextPlayer} </h3>
       )}
-    </>
+    </div>
   );
 }

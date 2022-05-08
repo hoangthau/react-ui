@@ -6,7 +6,7 @@ import {
   faFolderClosed,
   faPen,
   faTrash,
-  faCheck,
+  faSave,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -99,11 +99,20 @@ export function Item({
       className="item"
     >
       {renderIcon()}
-      {isEdit ? <input type="text" defaultValue={name} ref={inputRef} /> : name}
+      {isEdit ? (
+        <input
+          type="text"
+          defaultValue={name}
+          ref={inputRef}
+          onClick={(e) => e.stopPropagation()}
+        />
+      ) : (
+        name
+      )}
       {isEdit ? (
         <div className="actions">
           <button onClick={handleEdit}>
-            <FontAwesomeIcon icon={faCheck} />
+            <FontAwesomeIcon icon={faSave} />
           </button>
           <button onClick={toggleEdit}>
             <FontAwesomeIcon icon={faXmark} />
