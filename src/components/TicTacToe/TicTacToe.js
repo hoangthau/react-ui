@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import "./TicTacToe.css";
-import { checkDraw, checkWinner } from "./helpers";
+import { checkDraw, checkWinner, getInitialItems } from "./helpers";
 
-const initialItems = [
-  ["", "", ""],
-  ["", "", ""],
-  ["", "", ""],
-];
 let currentPlayer = "O";
 let hasWinner = false;
 
 export function TicTacToe() {
-  const [tableItems, setTableItems] = useState(initialItems);
+  const [tableItems, setTableItems] = useState(() => getInitialItems());
 
   const handleClick = (row, column) => {
     if (hasWinner || tableItems[row][column]) return;
@@ -23,11 +18,7 @@ export function TicTacToe() {
   };
 
   const playAgain = () => {
-    setTableItems([
-      ["", "", ""],
-      ["", "", ""],
-      ["", "", ""],
-    ]);
+    setTableItems(getInitialItems());
   };
 
   const nextPlayer = currentPlayer === "X" ? "O" : "X";

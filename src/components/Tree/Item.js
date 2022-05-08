@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import PropTypes from "prop-types";
 import { useDrop, useDrag } from "react-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,10 +23,10 @@ export function Item({
   name,
   id,
   index,
-  onClick,
-  onMove,
   isFolder,
   isOpen,
+  onClick,
+  onMove,
   onDelete,
   onSave,
   onAdd,
@@ -168,3 +169,16 @@ export function Item({
     </div>
   );
 }
+
+Item.propTypes = {
+  name: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool,
+  isFolder: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  onMove: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
+};

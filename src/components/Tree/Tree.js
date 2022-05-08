@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { TreeItem } from "./TreeItem";
 import "./Tree.css";
 import { updateTree, deleteNode, updateNode, addNode } from "./helpers";
 
-export function Tree({ items }) {
+export function Tree({ items = [] }) {
   const [treeItems, setTreeItems] = useState(items);
 
   const handleMove = (dragId, dropId) => {
@@ -68,3 +69,7 @@ export function Tree({ items }) {
     </>
   );
 }
+
+Tree.propTypes = {
+  items: PropTypes.array,
+};

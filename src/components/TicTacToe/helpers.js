@@ -48,3 +48,15 @@ export function checkDraw(items) {
   }
   return false;
 }
+
+export function getInitialItems() {
+  const result = [];
+  const length = 3;
+  for (let i = 0; i < length; i++) {
+    result.push([]);
+    for (let j = 0; j < length; j++) {
+      result[i].push("");
+    }
+  }
+  return result;
+}

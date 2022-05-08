@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Item } from "./Item";
 
 export function TreeItem({
@@ -67,3 +68,16 @@ export function TreeItem({
     </>
   );
 }
+
+TreeItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  subItems: PropTypes.array,
+  isOpen: PropTypes.bool,
+  isFolder: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  onMove: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
+};
