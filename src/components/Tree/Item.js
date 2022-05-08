@@ -8,6 +8,7 @@ import {
   faTrash,
   faSave,
   faXmark,
+  faAdd,
 } from "@fortawesome/free-solid-svg-icons";
 
 const itemStyles = {
@@ -27,10 +28,12 @@ export function Item({
   isOpen,
   onDelete,
   onSave,
+  onAdd,
 }) {
   const ref = useRef(null);
   const inputRef = useRef(null);
   const [isEdit, setIsEdit] = useState(false);
+  const [isAdd, setIsAdd] = useState(false);
 
   const [{ handlerId }, drop] = useDrop({
     accept: "TreeItem",
@@ -90,6 +93,17 @@ export function Item({
     toggleEdit(e);
   };
 
+  const toggleAdd = (e) => {
+    e.stopPropagation();
+    setIsAdd(!isAdd);
+  };
+
+  const handleAdd = (e) => {
+    e.stopPropagation();
+    toggleAdd(e);
+    onAdd(id, inputRef.current.value);
+  };
+
   return (
     <div
       ref={ref}
@@ -107,7 +121,16 @@ export function Item({
           onClick={(e) => e.stopPropagation()}
         />
       ) : (
-        name
+        <div className="item-name">{name}</div>
+      )}
+      {isAdd && (
+        <input
+          className="input-file"
+          type="text"
+          ref={inputRef}
+          placeholder="File name"
+          onClick={(e) => e.stopPropagation()}
+        />
       )}
       {isEdit ? (
         <div className="actions">
@@ -115,6 +138,15 @@ export function Item({
             <FontAwesomeIcon icon={faSave} />
           </button>
           <button onClick={toggleEdit}>
+            <FontAwesomeIcon icon={faXmark} />
+          </button>
+        </div>
+      ) : isAdd ? (
+        <div className="actions">
+          <button onClick={handleAdd}>
+            <FontAwesomeIcon icon={faSave} />
+          </button>
+          <button onClick={toggleAdd}>
             <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
@@ -126,6 +158,11 @@ export function Item({
           <button onClick={handleDelete}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
+          {isFolder && (
+            <button onClick={toggleAdd} title="Add a new file">
+              <FontAwesomeIcon icon={faAdd} />
+            </button>
+          )}
         </div>
       )}
     </div>

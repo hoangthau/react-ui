@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TreeItem } from "./TreeItem";
 import "./Tree.css";
-import { updateTree, deleteNode, updateNode } from "./helpers";
+import { updateTree, deleteNode, updateNode, addNode } from "./helpers";
 
 export function Tree({ items }) {
   const [treeItems, setTreeItems] = useState(items);
@@ -19,8 +19,16 @@ export function Tree({ items }) {
   };
 
   const handleSave = (nodeId, name) => {
+    if (!name) return;
     const newTree = [...treeItems];
     updateNode(newTree, nodeId, name);
+    setTreeItems(newTree);
+  };
+
+  const handleAdd = (nodeId, name) => {
+    if (!name) return;
+    const newTree = [...treeItems];
+    addNode(newTree, nodeId, name);
     setTreeItems(newTree);
   };
 
@@ -52,6 +60,7 @@ export function Tree({ items }) {
             onMove={handleMove}
             onDelete={handleDelete}
             onSave={handleSave}
+            onAdd={handleAdd}
           />
         );
       })}

@@ -10,7 +10,8 @@ export function TreeItem({
   index,
   onMove,
   onDelete,
-  onSave
+  onSave,
+  onAdd,
 }) {
   const [opened, setOpened] = useState(isOpen);
 
@@ -26,6 +27,7 @@ export function TreeItem({
         onMove={onMove}
         onDelete={onDelete}
         onSave={onSave}
+        onAdd={onAdd}
       />
       {opened && isFolder && (
         <div className="sub-items">
@@ -43,6 +45,7 @@ export function TreeItem({
                   onMove={onMove}
                   onDelete={onDelete}
                   onSave={onSave}
+                  onAdd={onAdd}
                 />
               );
             }
@@ -55,6 +58,7 @@ export function TreeItem({
                 onMove={onMove}
                 onDelete={onDelete}
                 onSave={onSave}
+                onAdd={onAdd}
               />
             );
           })}

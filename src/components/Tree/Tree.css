@@ -40,3 +40,7 @@ button {
 .item svg {
   margin-right: 8px;
 }
+
+.input-file {
+  margin-left: 12px;
+}

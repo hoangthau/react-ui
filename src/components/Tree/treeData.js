@@ -2,7 +2,8 @@ export const treeData = [
   {
     name: "public",
     id: "01",
-    children: []
+    isFolder: true,
+    children: [],
   },
   {
     name: "src",
@@ -17,28 +18,28 @@ export const treeData = [
         name: "hooks",
         id: "024",
         isFolder: true,
-        isOpen: true,
+        isOpen: false,
         children: [
           { name: "useData.js", id: "0241" },
           { name: "useAsync.js", id: "0242" },
-          { name: "useClick.js", id: "0243" }
-        ]
-      }
-    ]
+          { name: "useClick.js", id: "0243" },
+        ],
+      },
+    ],
   },
   {
     name: "helpers",
     id: "03",
     isFolder: true,
-    isOpen: true,
+    isOpen: false,
     children: [
       { name: "getData.js", id: "031" },
       { name: "getInfo.js", id: "032" },
-      { name: "getUser.js", id: "033" }
-    ]
+      { name: "getUser.js", id: "033" },
+    ],
   },
   {
     name: "package.json",
-    id: "04"
-  }
+    id: "04",
+  },
 ];

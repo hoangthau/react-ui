@@ -73,3 +73,15 @@ export function updateNode(tree = [], nodeId, name) {
     }
   }
 }
+
+export function addNode(tree = [], nodeId, name) {
+  for (let i = 0; i < tree.length; i++) {
+    if (tree[i].id === nodeId && Array.isArray(tree[i].children)) {
+      tree[i].children.push({ id: Math.round(Math.random() * 1e9), name });
+      return tree;
+    }
+    if (!!tree[i]?.children?.length) {
+      addNode(tree[i].children, nodeId, name);
+    }
+  }
+}
