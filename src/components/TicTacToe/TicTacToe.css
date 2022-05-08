@@ -22,3 +22,9 @@
   margin: 0;
   margin-top: 40px;
 }
+
+.table.disabled {
+  opacity: 0.4;
+  background-color: #eee;
+  pointer-events: none;
+}

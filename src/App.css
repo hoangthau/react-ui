@@ -3,3 +3,11 @@
   margin: 40px auto;
   max-width: 800px;
 }
+
+.content {
+  display: flex;
+}
+
+.content-item {
+  width: 50%;
+}

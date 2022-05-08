@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./TicTacToe.css";
+import { checkDraw, checkWinner } from "./helpers";
 
 const initialItems = [
   ["", "", ""],
@@ -8,41 +9,6 @@ const initialItems = [
 ];
 let currentPlayer = "O";
 let hasWinner = false;
-
-function checkWinner(items, player) {
-  const count = {
-    cross1: 0,
-    cross2: 0,
-    row: 0,
-    column: 0,
-  };
-  const winnerCheck = 3;
-  for (let i = 0; i < items.length; i++) {
-    if (items[i][i] === player) {
-      count.cross1++;
-    }
-    if (items[i][items.length - i - 1] === player) {
-      count.cross2++;
-    }
-    if (count.cross1 === winnerCheck || count.cross2 === winnerCheck) {
-      return true;
-    }
-    count.row = 0;
-    count.column = 0;
-    for (let j = 0; j < items[i].length; j++) {
-      if (items[i][j] === player) {
-        count.row++;
-      }
-      if (items[j][i] === player) {
-        count.column++;
-      }
-      if (count.row === winnerCheck || count.column === winnerCheck) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
 
 export function TicTacToe() {
   const [tableItems, setTableItems] = useState(initialItems);
@@ -65,11 +31,12 @@ export function TicTacToe() {
   };
 
   const nextPlayer = currentPlayer === "X" ? "O" : "X";
+  const isDraw = checkDraw(tableItems);
   hasWinner = checkWinner(tableItems, currentPlayer);
 
   return (
     <>
-      <div className="table">
+      <div className={`table ${hasWinner ? "disabled" : ""}`}>
         {tableItems.map((row, rowIndex) => {
           return row.map((column, colIndex) => (
             <div
@@ -82,9 +49,15 @@ export function TicTacToe() {
           ));
         })}
       </div>
-      {hasWinner ? (
+      {hasWinner || isDraw ? (
         <div className="title">
-          <h3 className="status">Game over. Winner is {currentPlayer}</h3>
+          {hasWinner ? (
+            <h3 className="status">
+              Game over. Winner is player {currentPlayer}
+            </h3>
+          ) : (
+            <h3 className="status">Game over. This game is draw</h3>
+          )}
           <button onClick={playAgain}>Play again</button>
         </div>
       ) : (
